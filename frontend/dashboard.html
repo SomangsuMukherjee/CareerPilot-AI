@@ -1,0 +1,1127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CareerPilot AI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=DM+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg:          #080c14;
+      --surface:     #0d1220;
+      --surface-2:   #111827;
+      --surface-3:   #16202f;
+      --border:      rgba(255,255,255,0.06);
+      --border-md:   rgba(255,255,255,0.10);
+      --border-strong: rgba(255,255,255,0.16);
+      --text:        #f1f5f9;
+      --text-2:      #94a3b8;
+      --text-3:      #64748b;
+      --accent:      #3b82f6;
+      --accent-glow: rgba(59,130,246,0.18);
+      --accent-2:    #06b6d4;
+      --green:       #10b981;
+      --green-glow:  rgba(16,185,129,0.15);
+      --amber:       #f59e0b;
+      --amber-glow:  rgba(245,158,11,0.15);
+      --red:         #ef4444;
+      --input-bg:    #0d1525;
+      --radius-sm:   8px;
+      --radius:      12px;
+      --radius-lg:   16px;
+      --radius-xl:   20px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', system-ui, sans-serif;
+      font-size: 14px;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── HEADER ─── */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(8, 12, 20, 0.82);
+      backdrop-filter: blur(20px) saturate(180%);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 28px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-icon {
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -0.5px;
+      flex-shrink: 0;
+    }
+
+    .brand-name {
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: -0.3px;
+      color: var(--text);
+    }
+
+    .brand-name span { color: var(--accent); }
+
+    .brand-sep {
+      width: 1px;
+      height: 16px;
+      background: var(--border-md);
+      margin: 0 2px;
+    }
+
+    .brand-sub {
+      font-size: 12px;
+      color: var(--text-3);
+      font-weight: 400;
+    }
+
+    .nav-right { display: flex; align-items: center; gap: 10px; }
+
+    .status-pill {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(16,185,129,0.2);
+      background: rgba(16,185,129,0.05);
+      color: #6ee7b7;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .status-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 6px var(--green);
+      animation: pulse 2.5s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    /* ─── LAYOUT ─── */
+    main {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 32px 28px 80px;
+    }
+
+    /* ─── HERO STRIP ─── */
+    .hero-strip {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 12px;
+      align-items: end;
+      margin-bottom: 28px;
+      padding-bottom: 28px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 16px;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    .hero-title {
+      font-family: 'Instrument Serif', Georgia, serif;
+      font-size: 38px;
+      font-weight: 400;
+      line-height: 1.1;
+      letter-spacing: -0.5px;
+      color: var(--text);
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .hero-desc {
+      margin-top: 10px;
+      font-size: 14px;
+      color: var(--text-2);
+      max-width: 520px;
+      line-height: 1.65;
+      font-weight: 300;
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 18px;
+    }
+
+    .tag {
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border-md);
+      color: var(--text-3);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      background: var(--surface-2);
+    }
+
+    /* ─── METRIC CARDS ─── */
+    .metrics-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      align-self: end;
+    }
+
+    .metric-card {
+      padding: 20px 22px;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      background: var(--surface-2);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .metric-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .metric-card.blue::before  { background: var(--accent-glow); }
+    .metric-card.green::before { background: var(--green-glow); }
+    .metric-card.amber::before { background: var(--amber-glow); }
+    .metric-card:hover::before { opacity: 1; }
+
+    .metric-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      margin-bottom: 10px;
+    }
+
+    .metric-value {
+      font-size: 28px;
+      font-weight: 600;
+      letter-spacing: -1px;
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .metric-value.blue  { color: var(--accent); }
+    .metric-value.green { color: var(--green); }
+    .metric-value.amber { color: var(--amber); }
+
+    /* ─── GRID ─── */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 20px;
+    }
+
+    /* ─── CARDS ─── */
+    .card {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 26px;
+      margin-bottom: 20px;
+      transition: border-color 0.2s;
+    }
+
+    .card:hover { border-color: var(--border-md); }
+
+    .card-header {
+      margin-bottom: 6px;
+    }
+
+    .card-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+      letter-spacing: -0.2px;
+    }
+
+    .card-desc {
+      font-size: 13px;
+      color: var(--text-3);
+      margin-top: 4px;
+      line-height: 1.5;
+      font-weight: 300;
+    }
+
+    .card-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 18px 0;
+    }
+
+    /* ─── FORM ELEMENTS ─── */
+    label {
+      display: block;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-2);
+      letter-spacing: 0.02em;
+      margin: 16px 0 6px;
+    }
+
+    textarea, input, select {
+      width: 100%;
+      padding: 10px 13px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border-md);
+      background: var(--input-bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13.5px;
+      font-weight: 400;
+      outline: none;
+      transition: border-color 0.15s, box-shadow 0.15s;
+      -webkit-appearance: none;
+    }
+
+    textarea { resize: vertical; min-height: 140px; line-height: 1.6; }
+
+    textarea:focus, input:focus, select:focus {
+      border-color: rgba(59,130,246,0.5);
+      box-shadow: 0 0 0 3px rgba(59,130,246,0.1);
+    }
+
+    textarea::placeholder, input::placeholder { color: var(--text-3); }
+
+    select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' viewBox='0 0 24 24'%3E%3Cpath stroke='%2364748b' stroke-width='2' stroke-linecap='round' d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      padding-right: 34px;
+      cursor: pointer;
+    }
+
+    select option { background: var(--surface-3); }
+
+    /* ─── BUTTONS ─── */
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 18px;
+    }
+
+    button {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 9px 16px;
+      border-radius: var(--radius);
+      border: none;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.15s;
+      white-space: nowrap;
+    }
+
+    button:active { transform: scale(0.98); }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      box-shadow: 0 1px 8px rgba(59,130,246,0.35);
+    }
+
+    .btn-primary:hover { background: #2563eb; box-shadow: 0 2px 12px rgba(59,130,246,0.45); }
+
+    .btn-ghost {
+      background: var(--surface-3);
+      border: 1px solid var(--border-md);
+      color: var(--text-2);
+    }
+
+    .btn-ghost:hover { background: var(--surface-3); border-color: var(--border-strong); color: var(--text); }
+
+    .btn-danger {
+      background: rgba(239,68,68,0.1);
+      border: 1px solid rgba(239,68,68,0.2);
+      color: #fca5a5;
+      padding: 7px 12px;
+      font-size: 12px;
+    }
+
+    .btn-danger:hover { background: rgba(239,68,68,0.18); border-color: rgba(239,68,68,0.35); }
+
+    /* ─── SCORE CARD ─── */
+    .score-card {
+      margin-top: 20px;
+      padding: 20px;
+      border-radius: var(--radius-lg);
+      background: var(--surface);
+      border: 1px solid var(--border-md);
+      display: none;
+    }
+
+    .score-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+
+    .score-label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-3);
+      margin-bottom: 4px;
+    }
+
+    .score-verdict {
+      font-size: 13px;
+      color: var(--text-2);
+      font-weight: 300;
+      max-width: 260px;
+    }
+
+    .score-number {
+      font-size: 42px;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: -2px;
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .progress-track {
+      height: 5px;
+      background: var(--surface-3);
+      border-radius: 999px;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      transition: width 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .skill-section { margin-bottom: 14px; }
+
+    .skill-section-label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--text-3);
+      margin-bottom: 8px;
+    }
+
+    .skill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .skill {
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 500;
+      border: 1px solid rgba(59,130,246,0.25);
+      background: rgba(59,130,246,0.08);
+      color: #93c5fd;
+    }
+
+    .skill.missing {
+      border-color: rgba(239,68,68,0.25);
+      background: rgba(239,68,68,0.07);
+      color: #fca5a5;
+    }
+
+    /* ─── RESULT BOX ─── */
+    .result-box {
+      margin-top: 16px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+      color: #7dd3fc;
+      font-family: 'DM Mono', 'Fira Code', monospace;
+      font-size: 12px;
+      line-height: 1.7;
+      min-height: 80px;
+      white-space: pre-wrap;
+      overflow-x: auto;
+    }
+
+    /* ─── APPLICATION LIST ─── */
+    .application-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .app-item {
+      padding: 18px 20px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      transition: border-color 0.2s;
+    }
+
+    .app-item:hover { border-color: var(--border-md); }
+
+    .app-item-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+
+    .app-company {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+      letter-spacing: -0.2px;
+    }
+
+    .app-role {
+      font-size: 13px;
+      color: var(--text-2);
+      font-weight: 300;
+      margin-top: 2px;
+    }
+
+    .app-url {
+      font-size: 12px;
+      color: var(--text-3);
+      margin-top: 6px;
+      font-family: 'DM Mono', monospace;
+    }
+
+    .app-notes {
+      font-size: 12.5px;
+      color: var(--text-3);
+      margin-top: 6px;
+      font-weight: 300;
+      font-style: italic;
+    }
+
+    .badge-status {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      flex-shrink: 0;
+    }
+
+    .badge-Applied   { background: rgba(59,130,246,0.1); color: #93c5fd; border: 1px solid rgba(59,130,246,0.2); }
+    .badge-Interview { background: rgba(245,158,11,0.1); color: #fcd34d; border: 1px solid rgba(245,158,11,0.2); }
+    .badge-Rejected  { background: rgba(239,68,68,0.08); color: #fca5a5; border: 1px solid rgba(239,68,68,0.15); }
+    .badge-Offer     { background: rgba(16,185,129,0.1); color: #6ee7b7; border: 1px solid rgba(16,185,129,0.2); }
+
+    .app-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+    }
+
+    .app-actions select {
+      width: auto;
+      padding: 6px 28px 6px 10px;
+      font-size: 12px;
+    }
+
+    /* ─── EMPTY STATE ─── */
+    .empty-state {
+      padding: 40px 24px;
+      text-align: center;
+      color: var(--text-3);
+      border: 1px dashed var(--border-md);
+      border-radius: var(--radius-lg);
+    }
+
+    .empty-state-icon {
+      font-size: 32px;
+      margin-bottom: 12px;
+      opacity: 0.4;
+    }
+
+    .empty-state p {
+      font-size: 13px;
+      font-weight: 300;
+    }
+
+    /* ─── ANALYTICS SECTION ─── */
+    .analytics-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    /* ─── FULL-WIDTH CARD ─── */
+    .card-full {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 26px;
+      margin-bottom: 20px;
+    }
+
+    .card-full:hover { border-color: var(--border-md); }
+
+    /* ─── SECTION SPACER ─── */
+    .section-gap { margin-bottom: 20px; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 28px;
+      text-align: center;
+      font-size: 12px;
+      color: var(--text-3);
+      font-weight: 300;
+    }
+
+    footer strong { color: var(--text-2); font-weight: 500; }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 960px) {
+      .hero-strip { grid-template-columns: 1fr; }
+      .metrics-row { grid-template-columns: repeat(3, 1fr); }
+      .grid-2 { grid-template-columns: 1fr; }
+      .hero-title { font-size: 28px; }
+    }
+
+    @media (max-width: 600px) {
+      .metrics-row { grid-template-columns: 1fr; }
+      main { padding: 20px 16px 60px; }
+      .nav { padding: 0 16px; }
+    }
+
+    /* ─── FADE IN ─── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-strip, .metrics-row, .grid-2, .card-full {
+      animation: fadeUp 0.45s ease both;
+    }
+
+    .grid-2 { animation-delay: 0.08s; }
+    .card-full { animation-delay: 0.14s; }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="nav">
+      <div class="brand">
+        <div class="brand-icon">CP</div>
+        <div class="brand-name">CareerPilot <span>AI</span></div>
+        <div class="brand-sep"></div>
+        <div class="brand-sub">Job search intelligence</div>
+      </div>
+      <div class="nav-right">
+        <div class="status-pill">
+          <span class="status-dot"></span>
+          API Online
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- HERO + METRICS -->
+    <section class="hero-strip">
+      <div>
+        <div class="hero-eyebrow">Job Search Intelligence</div>
+        <h1 class="hero-title">Navigate your search<br>with <em>data & clarity.</em></h1>
+        <p class="hero-desc">Compare CVs against job descriptions, surface skill gaps, and transform your job hunt from chaos into a measurable, structured pipeline.</p>
+        <div class="hero-tags">
+          <span class="tag">Python</span>
+          <span class="tag">FastAPI</span>
+          <span class="tag">Job Matching</span>
+          <span class="tag">Skill Gap Analysis</span>
+          <span class="tag">Application Tracking</span>
+          <span class="tag">DevOps-ready</span>
+        </div>
+      </div>
+
+      <div class="metrics-row">
+        <div class="metric-card blue">
+          <div class="metric-label">Applications</div>
+          <div class="metric-value blue" id="metricApplications">0</div>
+        </div>
+        <div class="metric-card green">
+          <div class="metric-label">Match Score</div>
+          <div class="metric-value green" id="metricScore">—</div>
+        </div>
+        <div class="metric-card amber">
+          <div class="metric-label">Skill Gaps</div>
+          <div class="metric-value amber" id="metricMissing">0</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MAIN GRID -->
+    <div class="grid-2">
+
+      <!-- LEFT: ANALYZER -->
+      <div>
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">CV Match Analyzer</div>
+            <div class="card-desc">Paste your CV and a job description to calculate fit and identify missing keywords.</div>
+          </div>
+
+          <div class="card-divider"></div>
+
+          <label>CV Text</label>
+          <textarea id="cvText" placeholder="Paste your full CV text here…"></textarea>
+
+          <label>Job Description</label>
+          <textarea id="jobText" placeholder="Paste the target job description here…"></textarea>
+
+          <div class="btn-row">
+            <button class="btn-primary" onclick="analyzeMatch()">
+              <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+              Analyze Match
+            </button>
+            <button class="btn-ghost" onclick="loadSample()">Load Sample</button>
+            <button class="btn-ghost" onclick="clearAnalyzer()">Clear</button>
+          </div>
+
+          <!-- SCORE CARD -->
+          <div class="score-card" id="scoreCard">
+            <div class="score-header">
+              <div>
+                <div class="score-label">Match Score</div>
+                <div class="score-verdict" id="verdictText">Waiting for analysis…</div>
+              </div>
+              <div class="score-number" id="scoreNumber">0%</div>
+            </div>
+
+            <div class="progress-track">
+              <div class="progress-fill" id="progressBar"></div>
+            </div>
+
+            <div class="skill-section">
+              <div class="skill-section-label">Matched Skills</div>
+              <div class="skill-list" id="matchedSkills"></div>
+            </div>
+
+            <div class="skill-section">
+              <div class="skill-section-label">Missing Skills</div>
+              <div class="skill-list" id="missingSkills"></div>
+            </div>
+          </div>
+
+          <div class="result-box" id="matchResult">Analysis output will appear here.</div>
+        </div>
+      </div>
+
+      <!-- RIGHT: ADD + ANALYTICS -->
+      <div>
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Add Application</div>
+            <div class="card-desc">Track companies, roles, statuses, links, and notes.</div>
+          </div>
+
+          <div class="card-divider"></div>
+
+          <label>Company</label>
+          <input id="company" placeholder="e.g. ESET" />
+
+          <label>Role</label>
+          <input id="role" placeholder="e.g. Junior DevOps Engineer" />
+
+          <label>Status</label>
+          <select id="status">
+            <option>Applied</option>
+            <option>Interview</option>
+            <option>Rejected</option>
+            <option>Offer</option>
+          </select>
+
+          <label>Job URL</label>
+          <input id="jobUrl" placeholder="https://…" />
+
+          <label>Notes</label>
+          <input id="notes" placeholder="Recruiter name, follow-up date…" />
+
+          <div class="btn-row">
+            <button class="btn-primary" onclick="addApplication()">
+              <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14" stroke-linecap="round"/></svg>
+              Save Application
+            </button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="analytics-header card-header">
+            <div>
+              <div class="card-title">Pipeline Analytics</div>
+              <div class="card-desc">Status distribution at a glance.</div>
+            </div>
+            <button class="btn-ghost" onclick="loadAnalytics()" style="margin-top: 0; padding: 7px 12px; font-size: 12px;">
+              <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M4 4v5h5M20 20v-5h-5M4 9A9 9 0 0120 15M20 15A9 9 0 014 9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Refresh
+            </button>
+          </div>
+          <div class="result-box" id="analyticsResult" style="margin-top: 14px;">No analytics loaded yet.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- APPLICATION TRACKER (FULL WIDTH) -->
+    <div class="card-full section-gap">
+      <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:6px;">
+        <div>
+          <div class="card-title">Application Tracker</div>
+          <div class="card-desc">Your full job-search pipeline. Update status or remove entries below.</div>
+        </div>
+        <button class="btn-ghost" onclick="loadApplications()" style="font-size: 12px; padding: 7px 12px;">
+          <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M4 4v5h5M20 20v-5h-5M4 9A9 9 0 0120 15M20 15A9 9 0 014 9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Refresh
+        </button>
+      </div>
+
+      <div style="height:1px; background: var(--border); margin: 16px 0;"></div>
+
+      <div id="applicationsList" class="application-list">
+        <div class="empty-state">
+          <div class="empty-state-icon">📋</div>
+          <p>No applications added yet.<br>Start by saving your first one above.</p>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <footer>
+    CareerPilot AI — built by <strong>Somangsu Mukherjee</strong>
+  </footer>
+
+  <script>
+  const API = "https://careerpilot-api-w6il.onrender.com";
+  const token = localStorage.getItem("token");
+
+  if (!token) {
+    window.location.href = "index.html";
+  }
+
+  function authHeaders() {
+    return {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`
+    };
+  }
+
+  function authOnlyHeaders() {
+    return {
+      "Authorization": `Bearer ${token}`
+    };
+  }
+
+  function logout() {
+    localStorage.removeItem("token");
+    localStorage.removeItem("userEmail");
+    window.location.href = "index.html";
+  }
+
+  function renderSkills(containerId, skills, missing = false) {
+    const container = document.getElementById(containerId);
+    container.innerHTML = "";
+
+    if (!skills || skills.length === 0) {
+      container.innerHTML = `<span class="skill ${missing ? "missing" : ""}">None detected</span>`;
+      return;
+    }
+
+    skills.forEach(skill => {
+      container.innerHTML += `<span class="skill ${missing ? "missing" : ""}">${skill}</span>`;
+    });
+  }
+
+  async function analyzeMatch() {
+    const cv = document.getElementById("cvText").value.trim();
+    const job = document.getElementById("jobText").value.trim();
+
+    if (!cv || !job) {
+      alert("Paste both CV text and job description first.");
+      return;
+    }
+
+    const response = await fetch(`${API}/match`, {
+      method: "POST",
+      headers: authHeaders(),
+      body: JSON.stringify({ cv_text: cv, job_description: job })
+    });
+
+    if (response.status === 401 || response.status === 403) {
+      logout();
+      return;
+    }
+
+    const data = await response.json();
+
+    document.getElementById("scoreCard").style.display = "block";
+    document.getElementById("scoreNumber").textContent = `${data.match_score}%`;
+    document.getElementById("progressBar").style.width = `${data.match_score}%`;
+    document.getElementById("metricScore").textContent = `${data.match_score}%`;
+    document.getElementById("metricMissing").textContent = data.missing_skills.length;
+    document.getElementById("verdictText").textContent =
+      data.recruiter_summary?.verdict || data.verdict || "Analysis complete";
+
+    renderSkills("matchedSkills", data.matched_skills);
+    renderSkills("missingSkills", data.missing_skills, true);
+
+    document.getElementById("matchResult").textContent =
+      JSON.stringify(data.recruiter_summary || data, null, 2);
+  }
+
+  async function addApplication() {
+    const company = document.getElementById("company").value.trim();
+    const role = document.getElementById("role").value.trim();
+
+    if (!company || !role) {
+      alert("Company and role are required.");
+      return;
+    }
+
+    const response = await fetch(`${API}/applications`, {
+      method: "POST",
+      headers: authHeaders(),
+      body: JSON.stringify({
+        company,
+        role,
+        status: document.getElementById("status").value,
+        job_url: document.getElementById("jobUrl").value,
+        notes: document.getElementById("notes").value
+      })
+    });
+
+    if (response.status === 401 || response.status === 403) {
+      logout();
+      return;
+    }
+
+    ["company", "role", "jobUrl", "notes"].forEach(id => {
+      document.getElementById(id).value = "";
+    });
+
+    loadApplications();
+    loadAnalytics();
+  }
+
+  async function loadApplications() {
+    const response = await fetch(`${API}/applications`, {
+      headers: authOnlyHeaders()
+    });
+
+    if (response.status === 401 || response.status === 403) {
+      logout();
+      return;
+    }
+
+    const data = await response.json();
+    document.getElementById("metricApplications").textContent = data.count;
+
+    const container = document.getElementById("applicationsList");
+    container.innerHTML = "";
+
+    if (!data.applications || data.applications.length === 0) {
+      container.innerHTML = `
+        <div class="empty-state">
+          <div class="empty-state-icon">📋</div>
+          <p>No applications added yet.<br>Start by saving your first one above.</p>
+        </div>`;
+      return;
+    }
+
+    data.applications.forEach(app => {
+      container.innerHTML += `
+        <div class="app-item">
+          <div class="app-item-header">
+            <div>
+              <div class="app-company">${app.company}</div>
+              <div class="app-role">${app.role}</div>
+              ${app.job_url ? `<div class="app-url">${app.job_url}</div>` : ""}
+              ${app.notes ? `<div class="app-notes">${app.notes}</div>` : ""}
+            </div>
+            <span class="badge-status badge-${app.status}">${app.status}</span>
+          </div>
+          <div class="app-actions">
+            <select onchange="changeStatus(${app.id}, this.value)">
+              <option ${app.status === "Applied" ? "selected" : ""}>Applied</option>
+              <option ${app.status === "Interview" ? "selected" : ""}>Interview</option>
+              <option ${app.status === "Rejected" ? "selected" : ""}>Rejected</option>
+              <option ${app.status === "Offer" ? "selected" : ""}>Offer</option>
+            </select>
+            <button class="btn-danger" onclick="deleteApplication(${app.id})">Delete</button>
+          </div>
+        </div>`;
+    });
+  }
+
+  async function changeStatus(appId, newStatus) {
+    const response = await fetch(`${API}/applications`, {
+      headers: authOnlyHeaders()
+    });
+
+    if (response.status === 401 || response.status === 403) {
+      logout();
+      return;
+    }
+
+    const data = await response.json();
+    const app = data.applications.find(a => a.id === appId);
+
+    if (!app) return;
+
+    await fetch(`${API}/applications/${appId}`, {
+      method: "PUT",
+      headers: authHeaders(),
+      body: JSON.stringify({
+        company: app.company,
+        role: app.role,
+        status: newStatus,
+        job_url: app.job_url,
+        notes: app.notes
+      })
+    });
+
+    loadApplications();
+    loadAnalytics();
+  }
+
+  async function deleteApplication(appId) {
+    const response = await fetch(`${API}/applications/${appId}`, {
+      method: "DELETE",
+      headers: authOnlyHeaders()
+    });
+
+    if (response.status === 401 || response.status === 403) {
+      logout();
+      return;
+    }
+
+    loadApplications();
+    loadAnalytics();
+  }
+
+  async function loadAnalytics() {
+    const response = await fetch(`${API}/analytics`, {
+      headers: authOnlyHeaders()
+    });
+
+    if (response.status === 401 || response.status === 403) {
+      logout();
+      return;
+    }
+
+    const data = await response.json();
+
+    document.getElementById("analyticsResult").textContent =
+      JSON.stringify(data, null, 2);
+
+    document.getElementById("metricApplications").textContent =
+      data.total_applications || 0;
+  }
+
+  function loadSample() {
+    document.getElementById("cvText").value =
+      "Junior DevOps / Cloud Engineer with Python, FastAPI, Docker, Linux, Git, Azure, CI/CD and PostgreSQL experience.";
+
+    document.getElementById("jobText").value =
+      "We are hiring a Junior DevOps Engineer with Python, Docker, Kubernetes, Terraform, Linux, CI/CD, Prometheus, Grafana and cloud monitoring experience.";
+  }
+
+  function clearAnalyzer() {
+    document.getElementById("cvText").value = "";
+    document.getElementById("jobText").value = "";
+    document.getElementById("matchResult").textContent = "Analysis output will appear here.";
+    document.getElementById("scoreCard").style.display = "none";
+    document.getElementById("metricScore").textContent = "—";
+    document.getElementById("metricMissing").textContent = "0";
+  }
+
+  loadApplications();
+  loadAnalytics();
+</script>
+</body>
+</html>
