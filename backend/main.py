@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from datetime import datetime
 from matcher import calculate_match
+from ai_matcher import analyze_with_ai
 
 app = FastAPI(
     title="CareerPilot AI",
@@ -53,7 +54,7 @@ def health():
 
 @app.post("/match")
 def match_cv_to_job(request: MatchRequest):
-    return calculate_match(request.cv_text, request.job_description)
+    return analyze_with_ai(request.cv_text, request.job_description)
 
 
 @app.post("/applications")
