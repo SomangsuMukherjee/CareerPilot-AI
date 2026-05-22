@@ -2,91 +2,314 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>CareerPilot AI — Login</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=DM+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+
   <style>
+    :root {
+      --bg:            #080c14;
+      --surface:       #0d1220;
+      --surface-2:     #111827;
+      --surface-3:     #16202f;
+      --border:        rgba(255,255,255,0.06);
+      --border-md:     rgba(255,255,255,0.10);
+      --border-strong: rgba(255,255,255,0.16);
+      --text:          #f1f5f9;
+      --text-2:        #94a3b8;
+      --text-3:        #64748b;
+      --accent:        #3b82f6;
+      --accent-glow:   rgba(59,130,246,0.18);
+      --accent-2:      #06b6d4;
+      --green:         #10b981;
+      --red:           #ef4444;
+      --input-bg:      #0d1525;
+      --radius:        12px;
+      --radius-lg:     16px;
+      --radius-xl:     20px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
     body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #080c14;
-      color: white;
+      font-family: 'DM Sans', system-ui, sans-serif;
+      font-size: 14px;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      -webkit-font-smoothing: antialiased;
+      padding: 24px;
+    }
+
+    /* subtle bg glow */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 40% at 20% 10%, rgba(59,130,246,0.07) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 35% at 80% 80%, rgba(6,182,212,0.05) 0%, transparent 55%);
+      pointer-events: none;
+    }
+
+    /* ─── BRAND MARK (top) ─── */
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 32px;
+      animation: fadeUp 0.4s ease both;
+    }
+
+    .brand-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 9px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
       display: flex;
       align-items: center;
       justify-content: center;
-      min-height: 100vh;
+      font-size: 14px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -0.5px;
+      flex-shrink: 0;
     }
 
+    .brand-name {
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: -0.3px;
+      color: var(--text);
+    }
+
+    .brand-name span { color: var(--accent); }
+
+    /* ─── CARD ─── */
     .card {
-      width: 420px;
-      background: #111827;
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 20px;
-      padding: 32px;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+      width: 100%;
+      max-width: 420px;
+      background: var(--surface-2);
+      border: 1px solid var(--border-md);
+      border-radius: var(--radius-xl);
+      padding: 36px 32px 32px;
+      box-shadow: 0 32px 80px rgba(0,0,0,0.45), 0 0 0 1px rgba(255,255,255,0.03);
+      animation: fadeUp 0.45s ease 0.06s both;
     }
 
-    h1 {
-      margin-bottom: 8px;
+    .card-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
     }
 
-    p {
-      color: #94a3b8;
+    .card-eyebrow::before {
+      content: '';
+      display: block;
+      width: 14px;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    .card-title {
+      font-family: 'Instrument Serif', Georgia, serif;
+      font-size: 28px;
+      font-weight: 400;
+      line-height: 1.15;
+      letter-spacing: -0.3px;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
+    .card-desc {
+      font-size: 13.5px;
+      color: var(--text-3);
+      font-weight: 300;
+      line-height: 1.5;
+      margin-bottom: 28px;
+    }
+
+    .divider {
+      height: 1px;
+      background: var(--border);
       margin-bottom: 24px;
     }
 
+    /* ─── FORM ─── */
+    label {
+      display: block;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-2);
+      letter-spacing: 0.02em;
+      margin-bottom: 6px;
+    }
+
+    .field { margin-bottom: 14px; }
+
     input {
       width: 100%;
-      padding: 13px;
-      margin-bottom: 14px;
-      border-radius: 10px;
-      border: 1px solid rgba(255,255,255,0.12);
-      background: #0d1525;
-      color: white;
-      box-sizing: border-box;
+      padding: 10px 13px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border-md);
+      background: var(--input-bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13.5px;
+      font-weight: 400;
+      outline: none;
+      transition: border-color 0.15s, box-shadow 0.15s;
     }
 
-    button {
+    input:focus {
+      border-color: rgba(59,130,246,0.5);
+      box-shadow: 0 0 0 3px rgba(59,130,246,0.1);
+    }
+
+    input::placeholder { color: var(--text-3); }
+
+    /* ─── BUTTON ─── */
+    .btn-primary {
       width: 100%;
-      padding: 13px;
-      border: none;
-      border-radius: 10px;
-      background: #3b82f6;
-      color: white;
-      font-weight: bold;
-      cursor: pointer;
+      padding: 11px 18px;
       margin-top: 6px;
-    }
-
-    .switch {
-      margin-top: 18px;
-      text-align: center;
-      color: #94a3b8;
-      cursor: pointer;
-    }
-
-    .error {
-      color: #fca5a5;
-      margin-top: 12px;
+      border: none;
+      border-radius: var(--radius);
+      background: var(--accent);
+      color: #fff;
+      font-family: 'DM Sans', sans-serif;
       font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      letter-spacing: 0.01em;
+      box-shadow: 0 1px 8px rgba(59,130,246,0.4);
+      transition: background 0.15s, box-shadow 0.15s, transform 0.1s;
+    }
+
+    .btn-primary:hover {
+      background: #2563eb;
+      box-shadow: 0 2px 14px rgba(59,130,246,0.5);
+    }
+
+    .btn-primary:active { transform: scale(0.98); }
+
+    /* ─── SWITCH ─── */
+    .switch {
+      margin-top: 20px;
+      text-align: center;
+      font-size: 13px;
+      color: var(--text-3);
+    }
+
+    .switch-link {
+      color: var(--accent);
+      font-weight: 500;
+      cursor: pointer;
+      background: none;
+      border: none;
+      font-family: inherit;
+      font-size: inherit;
+      padding: 0;
+      text-decoration: underline;
+      text-decoration-color: transparent;
+      transition: text-decoration-color 0.15s;
+    }
+
+    .switch-link:hover { text-decoration-color: var(--accent); }
+
+    /* ─── ERROR ─── */
+    .error-box {
+      display: none;
+      align-items: center;
+      gap: 8px;
+      margin-top: 16px;
+      padding: 10px 14px;
+      border-radius: var(--radius);
+      background: rgba(239,68,68,0.08);
+      border: 1px solid rgba(239,68,68,0.2);
+      color: #fca5a5;
+      font-size: 13px;
+      font-weight: 400;
+      line-height: 1.4;
+    }
+
+    .error-box.visible { display: flex; }
+
+    .error-icon {
+      flex-shrink: 0;
+      width: 15px;
+      height: 15px;
+      opacity: 0.8;
+    }
+
+    /* ─── FOOTER ─── */
+    .page-footer {
+      margin-top: 28px;
+      font-size: 12px;
+      color: var(--text-3);
+      font-weight: 300;
+      animation: fadeUp 0.45s ease 0.12s both;
+    }
+
+    /* ─── ANIMATION ─── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
 <body>
 
+  <div class="brand">
+    <div class="brand-icon">CP</div>
+    <div class="brand-name">CareerPilot <span>AI</span></div>
+  </div>
+
   <div class="card">
-    <h1 id="title">Login</h1>
-    <p>Access your CareerPilot dashboard.</p>
+    <div class="card-eyebrow" id="eyebrow">Welcome back</div>
+    <div class="card-title" id="title">Sign in to your account</div>
+    <div class="card-desc">Access your CareerPilot dashboard and pipeline.</div>
 
-    <input id="email" type="email" placeholder="Email" />
-    <input id="password" type="password" placeholder="Password" />
+    <div class="divider"></div>
 
-    <button onclick="submitAuth()">Continue</button>
-
-    <div class="switch" onclick="toggleMode()" id="switchText">
-      New here? Create an account
+    <div class="field">
+      <label for="email">Email address</label>
+      <input id="email" type="email" placeholder="you@example.com" autocomplete="email" />
     </div>
 
-    <div class="error" id="errorBox"></div>
+    <div class="field">
+      <label for="password">Password</label>
+      <input id="password" type="password" placeholder="••••••••" autocomplete="current-password" />
+    </div>
+
+    <button class="btn-primary" onclick="submitAuth()" id="submitBtn">Continue</button>
+
+    <div class="error-box" id="errorBox">
+      <svg class="error-icon" fill="none" viewBox="0 0 24 24" stroke="#fca5a5" stroke-width="2">
+        <circle cx="12" cy="12" r="10"/><path d="M12 8v4m0 4h.01" stroke-linecap="round"/>
+      </svg>
+      <span id="errorText"></span>
+    </div>
+
+    <div class="switch">
+      <span id="switchLabel">New here?</span>
+      <button class="switch-link" onclick="toggleMode()" id="switchBtn">Create an account</button>
+    </div>
   </div>
+
+  <div class="page-footer">CareerPilot AI — built by Somangsu Mukherjee</div>
 
   <script>
     const API = "https://careerpilot-api-w6il.onrender.com";
@@ -98,24 +321,29 @@
 
     function toggleMode() {
       mode = mode === "login" ? "register" : "login";
+      const isLogin = mode === "login";
 
-      document.getElementById("title").textContent =
-        mode === "login" ? "Login" : "Create Account";
+      document.getElementById("eyebrow").textContent    = isLogin ? "Welcome back" : "Get started";
+      document.getElementById("title").textContent      = isLogin ? "Sign in to your account" : "Create your account";
+      document.getElementById("submitBtn").textContent  = isLogin ? "Continue" : "Create Account";
+      document.getElementById("switchLabel").textContent = isLogin ? "New here?" : "Already have an account?";
+      document.getElementById("switchBtn").textContent  = isLogin ? "Create an account" : "Sign in";
 
-      document.getElementById("switchText").textContent =
-        mode === "login"
-          ? "New here? Create an account"
-          : "Already have an account? Login";
-
-      document.getElementById("errorBox").textContent = "";
+      document.getElementById("errorBox").classList.remove("visible");
+      document.getElementById("errorText").textContent = "";
     }
 
     async function submitAuth() {
-      const email = document.getElementById("email").value.trim();
+      const email    = document.getElementById("email").value.trim();
       const password = document.getElementById("password").value.trim();
+      const errorBox = document.getElementById("errorBox");
+      const errorText = document.getElementById("errorText");
+
+      errorBox.classList.remove("visible");
 
       if (!email || !password) {
-        document.getElementById("errorBox").textContent = "Email and password are required.";
+        errorText.textContent = "Email and password are required.";
+        errorBox.classList.add("visible");
         return;
       }
 
@@ -130,7 +358,8 @@
       const data = await response.json();
 
       if (!response.ok) {
-        document.getElementById("errorBox").textContent = data.detail || "Authentication failed.";
+        errorText.textContent = data.detail || "Authentication failed.";
+        errorBox.classList.add("visible");
         return;
       }
 
@@ -139,6 +368,10 @@
 
       window.location.href = "dashboard.html";
     }
+
+    document.getElementById("password").addEventListener("keydown", e => {
+      if (e.key === "Enter") submitAuth();
+    });
   </script>
 
 </body>
